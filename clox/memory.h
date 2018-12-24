@@ -4,6 +4,9 @@
 // This is needed for size_t
 #include <stddef.h>
 
+#define ALLOCATE(type, count)                   \
+  (type*)reallocate(NULL, 0, sizeof(type) * (count))
+
 #define GROW_CAPACTIY(capacity)                 \
   ((capacity) < 8 ? 8 : (capacity) * 2)
 
