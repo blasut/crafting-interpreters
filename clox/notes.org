@@ -1,0 +1,61 @@
+* hash tables
+
+** load factor
+
+   the load factor is the number of entires divided by the number of buckets.
+
+   "a hash table with 5 entries and an array of 16 elements has a load factor of 0.3125"
+   "The higher the load factor, the greater the chance of collisions."
+
+   - One way to mitigate collisions is growing the array
+   We grow the array when it goes over a specified load factor (a constant?)
+
+
+   
+** collision resolution
+   https://en.wikipedia.org/wiki/Birthday_problem
+   https://en.wikipedia.org/wiki/Pigeonhole_principle
+
+   "as the number of entries in the hash table increases, the change of a collision increases very quickly."
+
+   #+BEGIN_QUOTE
+   Put these two funny-named mathematical rules together and you get this observation: Take a birdhouse containing 365 pigeonholes, and use each pigeon’s birthday to assign it to a pigeonhole. You’ll need only about 26 randomly-chosen pigeons before you get a greater than 50% chance of two pigeons in the same box.
+   #+END_QUOTE
+
+
+
+   Techniques:
+   
+*** separate chaining
+
+    each bucket points to a linked list of entries, instead of having the entry straight up
+
+    to look up an entry you have to walk the list until you find the entry
+
+    #+BEGIN_QUOTE
+    In typical separate chained hash tables, it’s rare for a bucket to have more than one or two entries.
+    #+END_QUOTE
+
+    
+*** open addressing (or closed hashing)
+    #+BEGIN_QUOTE
+    It’s called “open” addressing because the entry may end up at an address (bucket) outside of its preferred one. It’s called “closed” hashing because all of the entries stay inside the array of buckets.
+    #+END_QUOTE
+
+
+    #+BEGIN_QUOTE
+    With this technique, all entries live directly in the bucket array, with one entry per bucket. If two entries collide in the same bucket, we find a different empty bucket to use instead.
+    #+END_QUOTE
+
+
+    finding an available bucket is called "probing" and the order of which you search is called a "probe sequence".
+
+
+    We are going to use "linear probing"
+    - good: cache friendly
+    - bad: if a lot of entires have similar keys, a lot of overflowing buckets can end up next to each other. (aka clustering)
+
+
+
+*** hashing function
+    http://www.isthe.com/chongo/tech/comp/fnv/
