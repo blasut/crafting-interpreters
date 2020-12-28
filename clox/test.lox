@@ -1,2 +1,10 @@
-print 1 + 2;
-print 3 * 4;
+
+{
+  var b = 5;
+  print b;
+  {
+    print b;
+    var c = 3 + b;
+    print c;
+  }
+}
